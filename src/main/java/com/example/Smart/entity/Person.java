@@ -9,15 +9,13 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.Collections;
+import java.util.*;
 
 @Setter
 @Getter
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
 @ToString
-@AllArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @Entity
 public class Person extends BaseEntity<Long> implements UserDetails {
@@ -28,8 +26,10 @@ public class Person extends BaseEntity<Long> implements UserDetails {
     String password;
     @Enumerated(EnumType.STRING)
     UserRole userRole;
-
     boolean isEnabled;
+
+    @Transient
+    List<PersonMapEntry> list=new ArrayList<>();
 
     public Person(String firstName, String lastName, String username
             , String password, UserRole userRole) {
