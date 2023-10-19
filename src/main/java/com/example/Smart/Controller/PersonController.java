@@ -1,5 +1,7 @@
 package com.example.Smart.Controller;
 
+import com.example.Smart.dto.ListPersonMapDto;
+import com.example.Smart.dto.PersonMapDto;
 import com.example.Smart.entity.Person;
 import com.example.Smart.service.PersonService;
 import lombok.RequiredArgsConstructor;
@@ -16,10 +18,15 @@ public class PersonController {
 
     private final PersonService personService;
 
-    @GetMapping("/inputNumber/{userName}/{userName}")
-    public void inputNumber(@PathVariable String userName, @PathVariable String number) {
-        personService.inputNumber(userName, number);
+    @GetMapping("/inputNumber/{userName}/{number}")
+    public PersonMapDto inputNumber(@PathVariable String userName, @PathVariable String number) {
+        return personService.inputNumber(userName, number);
     }
+    @GetMapping("/history/{username}")
+    ListPersonMapDto history(@PathVariable String username){
+       return personService.history(username);
+    }
+
 
 
 }

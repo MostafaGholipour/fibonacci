@@ -1,5 +1,6 @@
 package com.example.Smart.entity;
 
+import com.example.Smart.dto.PersonMapDto;
 import com.example.Smart.entity.base.BaseEntity;
 import com.example.Smart.entity.enums.UserRole;
 import jakarta.persistence.*;
@@ -27,9 +28,9 @@ public class Person extends BaseEntity<Long> implements UserDetails {
     @Enumerated(EnumType.STRING)
     UserRole userRole;
     boolean isEnabled;
+    @OneToMany(mappedBy = "person", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    List<PersonMap> list=new ArrayList<>();
 
-    @Transient
-    List<PersonMapEntry> list=new ArrayList<>();
 
     public Person(String firstName, String lastName, String username
             , String password, UserRole userRole) {
